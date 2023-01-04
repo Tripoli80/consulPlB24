@@ -8,15 +8,8 @@ router.post("/getdeal", tryWrapper(getDeal));
 router.get("/", () => {
   console.log("get");
 });
-router.post("/", () => {
-  console.log("post");
-});
-router.options("/", () => {
-  console.log("options");
-});
-
-router.delete("/", () => {
-  console.log("delete");
+router.all("/", (req, res) => {
+  console.log("all: ", req);
 });
 
 module.exports = router;

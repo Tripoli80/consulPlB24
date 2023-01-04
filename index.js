@@ -8,7 +8,7 @@ var app = express();
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const dealRouter = require("./src/routes/deal");
 const { errorHandler } = require("./src/helpers");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 
 app.use(express.json());
 app.use(logger(formatsLogger));
