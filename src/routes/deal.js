@@ -9,7 +9,7 @@ router.get("/", () => {
   console.log("get");
 });
 router.all("/", (req, res) => {
-  console.log("all: ", req);
+  console.log("all: ", req.body);
 });
 
 module.exports = router;
