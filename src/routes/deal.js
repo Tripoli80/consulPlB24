@@ -5,11 +5,12 @@ const { tryWrapper } = require("../helpers");
 const router = express.Router();
 
 router.post("/getdeal", tryWrapper(getDeal));
-router.get("/", () => {
-  console.log("get");
-});
-router.all("/", (req, res) => {
-  console.log("all: ", req.body);
+
+router.post("/", (req, res) => {
+    console.log("all: ", req.body);
+  console.log("params: ", req.params);
+  console.log("query: ", req.query);
+    
 });
 
 module.exports = router;
