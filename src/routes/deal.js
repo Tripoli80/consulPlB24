@@ -6,11 +6,10 @@ const router = express.Router();
 
 router.post("/getdeal", tryWrapper(getDeal));
 
-router.post("/", (err, req, res, next) => {
+router.post("/", (err, req, res) => {
   console.log("err: ", err);
   console.log("req: ", req);
   console.log("res: ", res);
-  console.log("next: ", next);
 });
 
 module.exports = router;
