@@ -6,15 +6,11 @@ const router = express.Router();
 
 router.post("/getdeal", tryWrapper(getDeal));
 
-router.post("/", (reqw, res) => {
-    const req= {...reqw}
-
-  console.log("all: ", req.body);
-  console.log("headers: ", req.headers);
-  console.log("data: ", req.data);
-  console.log("params: ", req.params);
-  console.log("query: ", req.query);
-  console.log("req: ", req);    
+router.post("/", (err, req, res, next) => {
+  console.log("err: ", err);
+  console.log("req: ", req.headers);
+  console.log("res: ", res);
+  console.log("next: ", next);
 });
 
 module.exports = router;
