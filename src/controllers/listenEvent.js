@@ -6,8 +6,6 @@ const { getDeal } = require("./dealControllers");
 
 const listeningEvents = async (req, res) => {
 
-    const data =  JSON.stringify(req.body)
-    console.log("🚀 ~ file: listenEvent.js:10 ~ listeningEvents ~ data", data)
     const { ts, event } = req.body;
     
   console.log("🚀 ~ ts +event", ts, EVENT_ID, new Date());
@@ -20,6 +18,7 @@ const listeningEvents = async (req, res) => {
   EVENT_ID.push(Number(ts));
 
   const idDeal = req.body["data[FIELDS][ID]"];
+  console.log("🚀 ~ idDeal", idDeal)
   const dealData = await tryWrapper(getDealById(idDeal));
   console.dir(event, idDeal);
   console.log("🚀 ", dealData);
