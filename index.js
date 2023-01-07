@@ -11,7 +11,9 @@ const { errorHandler } = require("./src/helpers");
 const PORT = process.env.PORT || 80;
 
 // app.use(express.json());
-app.use(express.bodyParser());
+const bodyParser = require("body-parser");
+app.use(bodyParser);
+
 app.use(logger(formatsLogger));
 
 app.use(cors());
