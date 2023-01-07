@@ -4,14 +4,13 @@ const { getDealById } = require("../services/dealServices");
 const { getDeal } = require("./dealControllers");
 
 const listeningEvents = async (req, res) => {
-    console.log("🚀 ~ ts +event", ts, EVENT_ID, new Date());
   const { ts, event } = req.body;
+  console.log("🚀 ~ ts +event", ts, EVENT_ID, new Date());
   if (EVENT_ID.includes(Number(ts))) {
     console.log("!!!!!!!!!!alredy do");
     return res.send("ok");
   }
-    console.log("🚀 ~ ts +event", ts, EVENT_ID, req);
-    
+  console.log("🚀 ~ ts +event", ts, EVENT_ID, req);
 
   EVENT_ID.push(Number(ts));
 
