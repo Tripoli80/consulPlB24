@@ -7,7 +7,7 @@ var app = express();
 var bodyParser = require("body-parser");
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-const dealRouter = require("./src/routes/deal");
+const listenEvent = require("./src/routes/events");
 const { errorHandler } = require("./src/helpers");
 const PORT = process.env.PORT || 80;
 
@@ -19,13 +19,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json())
-// app.use(express.json());
-// const bodyParser = require('body-parser');
-// app.use(bodyParser);
+
 
 app.use(logger(formatsLogger));
 
-app.use("/api/", dealRouter);
+app.use("/api/", listenEvent);
 // app.use('/api/contacts', tryWrapper(auth), contactsRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Routs not found" });
