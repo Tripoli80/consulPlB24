@@ -8,9 +8,12 @@ router.post("/getdeal", tryWrapper(getDeal));
 
 router.post("/", (req, res) => {
   //   console.log("err: ", err);
-  
+
   console.log("Body");
   console.dir(req.body);
+
+  console.log("req");
+  console.dir(req);
   res.send("test");
   //   console.log("req: ", req);
   //   console.log("res: ", res);
