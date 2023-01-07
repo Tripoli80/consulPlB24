@@ -8,10 +8,11 @@ router.post("/getdeal", tryWrapper(getDeal));
 
 router.post("/", (req, res) => {
   //   console.log("err: ", err);
-     console.dir(req.body);
-     res.send("test");
-//   console.log("req: ", req);
-//   console.log("res: ", res);
-// });
+  console.log("Body");
+  console.dir(req.body);
+  res.send("test");
+  //   console.log("req: ", req);
+  //   console.log("res: ", res);
+});
 
 module.exports = router;
