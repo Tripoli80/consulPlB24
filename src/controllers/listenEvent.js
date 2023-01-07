@@ -6,7 +6,7 @@ const { getDeal } = require("./dealControllers");
 
 const listeningEvents = async (req, res) => {
 
-    const data =  JSON.parse(req.body)
+    const data =  JSON.stringify(req.body)
     console.log("🚀 ~ file: listenEvent.js:10 ~ listeningEvents ~ data", data)
     const { ts, event } = req.body;
     
