@@ -10,7 +10,7 @@ const listeningEvents = async (req, res) => {
     console.log("!!!!!!!!!!alredy do");
     return res.send("ok");
   }
-    console.log("🚀 ~ ts +event", ts, EVENT_ID);
+    console.log("🚀 ~ ts +event", ts, EVENT_ID, req);
     
 
   EVENT_ID.push(Number(ts));
