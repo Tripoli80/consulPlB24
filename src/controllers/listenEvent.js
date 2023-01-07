@@ -3,20 +3,19 @@ const { tryWrapper } = require("../helpers");
 const { getDealById } = require("../services/dealServices");
 const { getDeal } = require("./dealControllers");
 
-const listeningEvents = async (req, res) => {
+const listeningEvents = (req, res) => {
   const { ts, event } = req.body;
-  if (EVENT_ID.includes(ts)) {
+  if (EVENT_ID.includes(+ts)) {
     console.log("alredy do");
     return res.send("ok");
   }
 
-  EVENT_ID.push(ts);
+  EVENT_ID.push(Number(ts));
 
-  console.log("🚀 ~ ts +event.", ts, EVENT_ID, new Date());
+  console.log("🚀 ~ ts +event.", ts, EVENT_ID);
   const idDeal = req.body["data[FIELDS][ID]"];
-  const dealData = await tryWrapper(getDealById(idDeal));
+  const dealData = tryWrapper(getDealById(idDeal)).then(console.log);
   console.dir(event, idDeal);
-  console.log("🚀 ", dealData);
 
   res.send("ok");
 };
