@@ -10,13 +10,13 @@ const dealRouter = require("./src/routes/deal");
 const { errorHandler } = require("./src/helpers");
 const PORT = process.env.PORT || 80;
 
-// app.use(express.json());
-const bodyParser = require("body-parser");
-app.use(bodyParser);
+app.use(cors());
+app.use(express.json());
+// const bodyParser = require('body-parser');
+// app.use(bodyParser);
 
 app.use(logger(formatsLogger));
 
-app.use(cors());
 app.use("/api/", dealRouter);
 // app.use('/api/contacts', tryWrapper(auth), contactsRouter);
 app.use((req, res) => {
