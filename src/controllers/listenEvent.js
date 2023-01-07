@@ -5,13 +5,13 @@ const { getDeal } = require("./dealControllers");
 
 const listeningEvents = async (req, res) => {
   const { ts, event } = req.body;
-  console.log("🚀 ~ ts +event.", ts, EVENT_ID);
   if (EVENT_ID.includes(ts)) {
     console.log("alredy do");
     return res.send("ok");
   }
 
   EVENT_ID.push(ts);
+  console.log("🚀 ~ ts +event.", ts, EVENT_ID);
   const idDeal = req.body["data[FIELDS][ID]"];
   const dealData = await tryWrapper(getDealById(idDeal));
   console.dir(event, idDeal);
