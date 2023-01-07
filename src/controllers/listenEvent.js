@@ -11,7 +11,8 @@ const listeningEvents = async (req, res) => {
   }
 
   EVENT_ID.push(ts);
-  console.log("🚀 ~ ts +event.", ts, EVENT_ID);
+
+  console.log("🚀 ~ ts +event.", ts, EVENT_ID, new Date());
   const idDeal = req.body["data[FIELDS][ID]"];
   const dealData = await tryWrapper(getDealById(idDeal));
   console.dir(event, idDeal);
