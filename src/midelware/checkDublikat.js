@@ -1,6 +1,6 @@
 const { EVENT_ID } = require("../constans");
 
-const checkDublikat = (req, res) => {
+const checkDublikat = (req, res, next) => {
   const {
     body: { ts },
   } = req;
@@ -9,5 +9,6 @@ const checkDublikat = (req, res) => {
     return res.status(210).send("already do");
   }
   EVENT_ID.push(Number(ts));
+  return next();
 };
-module.exports = {checkDublikat}
+module.exports = { checkDublikat };
