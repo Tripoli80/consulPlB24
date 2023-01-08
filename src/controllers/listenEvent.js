@@ -19,10 +19,10 @@ const listeningEvents = (req, res) => {
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
   const count = dealData[process.env.COUNT_PAYMANT];
   const name = dealData["TITLE"];
-  console.log("🚀 ~  dates", dates, dates.length);
+  console.log("🚀 ~  dates", dates, dates.lenght);
   console.log("🚀 ~  approve", approve);
 
-  if (approve && dates.length > 0) {
+  if (approve && dates.lenght > 0) {
     console.log("in If");
     const option = {
       id: idDeal,
