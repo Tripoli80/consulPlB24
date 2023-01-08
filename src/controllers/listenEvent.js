@@ -7,7 +7,6 @@ const { addToCallendar } = require("../services/callendar");
 const { getDealById } = require("../services/dealServices");
 
 const listeningEvents = async (req, res) => {
-  const { ts, event } = req.body;
   const idDeal = req.body["data[FIELDS][ID]"];
 
   const dealData = await getDealById(Number(idDeal));

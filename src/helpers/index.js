@@ -1,11 +1,7 @@
 const axios = require("axios").default;
-const { Conflict, Unauthorized, NotFound, BadRequest } = require("http-errors");
+const { BadRequest } = require("http-errors");
 
-const fetchToBitrix = axios.create({
-  baseURL: process.env.API_HOOK,
-  // timeout: 5000,
-  // headers: {'X-Custom-Header': 'foobar'}
-});
+
 const tryWrapper = (controller) => {
   return (req, res, next) => {
     controller(req, res, next).catch(next);
@@ -18,8 +14,15 @@ const errorHandler = (err, req, res, next) => {
 };
 
 const curl = async (metod, option) => {
+  const fetchToBitrix = axios.create({
+    baseURL: process.env.API_HOOK,
+    // headers: {'X-Custom-Header': 'foobar'}
+    // timeout: 5000,
+  });
+  console.log("🚀 ~ file: index.js:9 ~ process.env.API_HOOK", process.env.API_HOOK)
   try {
     const result = await fetchToBitrix.post(metod, option);
+    console.log("🚀 ~ file: index.js:24 ~ result", result)
     const responce = result.data.result;
     return responce;
   } catch (error) {
