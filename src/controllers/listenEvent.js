@@ -28,7 +28,7 @@ const listeningEvents = async (req, res) => {
 
   console.log("🚀 EVENT_ID", EVENT_ID);
   if (approve && dates.length > 0) {
-    await addToCallendar({ dates, count, approve, name, idDeal });
+     addToCallendar({ dates, count, approve, name, idDeal });
   }
   res.send("ok");
 };

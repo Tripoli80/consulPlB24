@@ -2,6 +2,18 @@ const { curl } = require("../helpers");
 
 const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
   let result = [];
+  const option = {
+    id: idDeal,
+    fields: {},
+    params: { REGISTER_SONET_EVENT: "N" },
+  };
+  option.fields[process.env.ARR_PAY_DATE] = [];
+  option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
+  option.fields[process.env.COUNT_PAYMANT] = 0;
+  console.log("🚀 ~ file: callendar.js:32 ~ option", option);
+
+  const updateDeal = await curl("crm.deal.update.json", option);
+  console.log("🚀 updateDeal", updateDeal);
 
   for (const date of dates) {
     const option = {
@@ -27,13 +39,6 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
     result = [...result, await curl("calendar.event.add.json", option)];
   }
 
-    const option = { id: idDeal, fields: {}, params: { REGISTER_SONET_EVENT: "N" } };
-  option.fields[process.env.ARR_PAY_DATE] = [];
-  option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
-  option.fields[process.env.COUNT_PAYMANT] = 0;
-  console.log("🚀 ~ file: callendar.js:32 ~ option", option);
-
-  
   return result;
 };
 
