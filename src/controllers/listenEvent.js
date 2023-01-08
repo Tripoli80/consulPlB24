@@ -2,29 +2,42 @@
 require("dotenv").config();
 
 let { EVENT_ID } = require("../constans");
+const { curl } = require("../helpers");
 const { addToCallendar } = require("../services/callendar");
 // const { tryWrapper } = require("../helpers");
 const { getDealById } = require("../services/dealServices");
 
-const listeningEvents =  (req, res) => {
+const listeningEvents = (req, res) => {
   const { ts, event } = req.body;
   const idDeal = req.body["data[FIELDS][ID]"];
   EVENT_ID = [...EVENT_ID, Number(ts)];
   console.log("🚀 EVENT_ID", EVENT_ID);
 
-  const dealData =  getDealById(Number(idDeal));
+  const dealData = getDealById(Number(idDeal));
 
   const dates = dealData[process.env.ARR_PAY_DATE];
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
   const count = dealData[process.env.COUNT_PAYMANT];
   const name = dealData["TITLE"];
+  console.log("🚀 ~  dates", dates, dates.length);
+  console.log("🚀 ~  approve", approve);
 
   if (approve && dates.length > 0) {
-      addToCallendar({ dates, count, approve, name, idDeal })
-      res.send("ok");
-    
+    console.log("in If");
+    const option = {
+      id: idDeal,
+      fields: {},
+      params: { REGISTER_SONET_EVENT: "N" },
+    };
+    option.fields[process.env.ARR_PAY_DATE] = null;
+    option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
+    option.fields[process.env.COUNT_PAYMANT] = 0;
+
+    curl("crm.deal.update.json", option);
+    addToCallendar({ dates, count, approve, name, idDeal });
+    return res.send("ok");
   } else {
-    res.send("not");
+    return res.send("not");
   }
 };
 

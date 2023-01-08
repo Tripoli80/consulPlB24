@@ -23,6 +23,7 @@ const getDealById = async (id) => {
   }
 };
 
+
 module.exports = {
   getDealById,
 };
