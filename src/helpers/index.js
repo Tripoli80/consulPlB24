@@ -1,6 +1,6 @@
 const axios = require("axios").default;
 const { BadRequest } = require("http-errors");
-
+const fs = require("fs").promises;
 
 const tryWrapper = (controller) => {
   return (req, res, next) => {
@@ -19,10 +19,18 @@ const curl = async (metod, option) => {
     // headers: {'X-Custom-Header': 'foobar'}
     // timeout: 5000,
   });
-  console.log("🚀 ~ file: index.js:9 ~ process.env.API_HOOK", process.env.API_HOOK)
+  console.log(
+    "🚀 ~ file: index.js:9 ~ process.env.API_HOOK",
+    process.env.API_HOOK
+  );
+
+  fs.mkdir("/src/localstor/new_folder2", (err) => {
+    if (err) throw err; // не удалось создать папку
+    console.log("Папка успешно создана");
+  });
   try {
     const result = await fetchToBitrix.post(metod, option);
-    console.log("🚀 ~ file: index.js:24 ~ result", result)
+    console.log("🚀 ~ file: index.js:24 ~ result", result);
     const responce = result.data.result;
     return responce;
   } catch (error) {
