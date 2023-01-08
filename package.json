@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node ./index.js",
-    "dev": "cross-env NODE_ENV=development nodemon ./index.js"
+    "dev": "cross-env NODE_ENV=development nodemon ./index.js",
+    "push":" git add . ; git commit -m 'first commit'; git push -u origin main"
   },
   "keywords": [],
   "author": "",
