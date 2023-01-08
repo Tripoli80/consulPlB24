@@ -4,7 +4,6 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
   let result = [];
  
 
-  console.log("🚀 updateDeal", updateDeal);
 
   for (const date of dates) {
     const option = {
