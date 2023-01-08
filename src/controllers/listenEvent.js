@@ -39,10 +39,11 @@ const listeningEvents = async (req, res) => {
     option.fields[process.env.COUNT_PAYMANT] = 0;
 
     await curl("crm.deal.update.json", option);
-      await addToCallendar({ dates, count, approve, name, idDeal });
-      res.code(201);
+    await addToCallendar({ dates, count, approve, name, idDeal });
+    res.code(201);
     return res.send("ok");
   } else {
+    res.code(209);
     return res.send("not");
   }
 };
