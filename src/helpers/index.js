@@ -23,13 +23,9 @@ const curl = async (metod, option) => {
     const responce = result.data.result;
     return responce;
   } catch (error) {
-    if (error.response.data.error_description === "Not found")
-      throw new NotFound();
-    throw new BadRequest(error.response.data);
+    throw new BadRequest({ err: error.response, metod });
   }
 };
-
-
 
 module.exports = {
   tryWrapper,
