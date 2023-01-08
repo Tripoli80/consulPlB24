@@ -17,23 +17,18 @@ const listeningEvents = async (req, res) => {
   //   }
   //   console.log("🚀 ~ ts +event", ts, EVENT_ID);
 
-  EVENT_ID.push(Number(ts));
+  EVENT_ID = [...EVENT_ID, Number(ts)];
 
   const dealData = await getDealById(Number(idDeal));
-  console.dir(event, idDeal);
-  console.log("🚀 DEAL: ");
-  console.log(
-    "🚀 ~ file: listenEvent.js:25 ~ process.env.APPROVE_TO_CALENDAR",
-    process.env.API_HOOK,
-    process.env.APPROVE_TO_CALENDAR
-  );
+
   const dates = dealData[process.env.ARR_PAY_DATE];
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
   const count = dealData[process.env.COUNT_PAYMANT];
   const name = dealData["TITLE"];
 
+  console.log("🚀 EVENT_ID", EVENT_ID);
   if (approve && dates.length > 0) {
-    const toCal = await addToCallendar({ dates, count, approve, name, idDeal });
+    await addToCallendar({ dates, count, approve, name, idDeal });
   }
   res.send("ok");
 };

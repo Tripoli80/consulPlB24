@@ -33,8 +33,7 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
   option.fields[process.env.COUNT_PAYMANT] = 0;
   console.log("🚀 ~ file: callendar.js:32 ~ option", option);
 
-  const updateDeal = await curl("crm.deal.update.json", option);
-  console.log("🚀 updateDeal", updateDeal);
+  
   return result;
 };
 
