@@ -9,7 +9,7 @@ const AWS = require("aws-sdk");
   var s3Client = new AWS.S3();
 
   var params = {
-    Bucket: process.env.BUCKET,
+    Bucket: process.env.CYCLIC_BUCKET_NAME,
     Key: "persist/",
   };
   console.log(
