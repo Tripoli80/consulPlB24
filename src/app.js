@@ -12,6 +12,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger(formatsLogger));
+app.use(express.static(".node-persist"));
 
 app.use("/api/", events);
 app.use((req, res) => {
