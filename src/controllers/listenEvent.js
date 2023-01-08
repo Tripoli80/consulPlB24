@@ -40,11 +40,9 @@ const listeningEvents = async (req, res) => {
 
     await curl("crm.deal.update.json", option);
     await addToCallendar({ dates, count, approve, name, idDeal });
-    res.code = 201;
-    return res.send("ok");
+    return res.status(201).send("ok");
   } else {
-    res.code = 209;
-    return res.send("not");
+    return res.status(209).send("not");
   }
 };
 
