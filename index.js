@@ -9,13 +9,11 @@ var bodyParser = require("body-parser");
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const listenEvent = require("./src/routes/events");
 const { errorHandler } = require("./src/helpers");
+const { storage } = require("./src/helpers/storage");
 const PORT = process.env.PORT || 80;
-const storage = require("node-persist");
-await storage.init(/* options ... */);
-await storage.setItem("name", "yourname");
-console.log(await storage.getItem("name")); 
 
 app.use(cors());
+storage.init();
 
 // var app = express();
 
@@ -23,7 +21,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 // app.use(bodyParser.json())
-
 
 app.use(logger(formatsLogger));
 
