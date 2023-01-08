@@ -13,6 +13,11 @@ const { myStorage } = require("./src/helpers/storage");
 const PORT = process.env.PORT || 80;
 
 app.use(cors());
+console.log("first")
+// storage.init();
+console.log("second")
+// var app = express();
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
@@ -28,8 +33,7 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 //Connect to the database before listening
-myStorage.init().then(() => {
-  app.listen(process.env.PORT, function () {
-    console.log(`CORS-enabled web server listening on port ${PORT}`);
-  });
+myStorage.init()
+app.listen(process.env.PORT, function () {
+  console.log(`CORS-enabled web server listening on port ${PORT}`);
 });
