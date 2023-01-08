@@ -7,7 +7,9 @@ const instance = axios.create({
   // headers: {'X-Custom-Header': 'foobar'}
 });
 const getDealById = async (id) => {
-  const option = { id };
+  const option = {
+    id,
+  };
   try {
     const result = await instance.post(`crm.deal.get.json`, option);
     if (!result) return {};
