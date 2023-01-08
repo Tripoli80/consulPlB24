@@ -1,7 +1,7 @@
 // const { json } = require("body-parser");
 require("dotenv").config();
 
-const { EVENT_ID } = require("../constans");
+ let { EVENT_ID } = require("../constans");
 const { addToCallendar } = require("../services/callendar");
 // const { tryWrapper } = require("../helpers");
 const { getDealById } = require("../services/dealServices");
