@@ -27,7 +27,12 @@ const listeningEvents = async (req, res) => {
     const option = {
       id: idDeal,
       fields: {},
-      params: { REGISTER_SONET_EVENT: "N" },
+      params: {
+        REGISTER_SONET_EVENT: "N",
+        REGISTER_EVENT: "N",
+        EVENT: "N",
+        REGISTER: "N",
+      },
     };
     option.fields[process.env.ARR_PAY_DATE] = null;
     option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
