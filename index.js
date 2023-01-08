@@ -10,6 +10,10 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const listenEvent = require("./src/routes/events");
 const { errorHandler } = require("./src/helpers");
 const PORT = process.env.PORT || 80;
+const storage = require("node-persist");
+await storage.init(/* options ... */);
+await storage.setItem("name", "yourname");
+console.log(await storage.getItem("name")); 
 
 app.use(cors());
 

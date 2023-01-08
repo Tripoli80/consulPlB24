@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=production node ./index.js",
     "dev": "cross-env NODE_ENV=development nodemon ./index.js",
-    "push":" git add . ; git commit -m 'first commit'; git push -u origin main"
+    "push": " git add . ; git commit -m 'first commit'; git push -u origin main"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +22,7 @@
     "express": "^4.18.2",
     "http-errors": "^2.0.0",
     "morgan": "^1.10.0",
+    "node-persist": "^3.1.0",
     "nodemon": "^2.0.20"
   }
 }
