@@ -23,7 +23,7 @@ const curl = async (metod, option) => {
     const responce = result.data.result;
     return responce;
   } catch (error) {
-    throw new BadRequest({ err: error.response, metod });
+    throw new BadRequest({ error, metod });
   }
 };
 

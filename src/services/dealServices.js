@@ -16,8 +16,8 @@ const getDealById = async (id) => {
     const responce = result.data.result;
     return responce;
   } catch (error) {
-    if (error.response.data.error_description === "Not found")
-      throw new NotFound();
+    // if (error.response.data.error_description === "Not found")
+    //   throw new NotFound();
     // return { message: "Not found" };
     throw new BadRequest(error.response.data);
   }
