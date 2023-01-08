@@ -1,6 +1,8 @@
-const { json } = require("body-parser");
+// const { json } = require("body-parser");
+require("dotenv").config();
+
 const { EVENT_ID } = require("../constans");
-const { tryWrapper } = require("../helpers");
+// const { tryWrapper } = require("../helpers");
 const { getDealById } = require("../services/dealServices");
 
 const listeningEvents = async (req, res) => {
@@ -19,6 +21,7 @@ const listeningEvents = async (req, res) => {
   const dealData = await getDealById(Number(idDeal));
   console.dir(event, idDeal);
   console.log("🚀 DEAL: ");
+  console.log("🚀 ~ file: listenEvent.js:25 ~ process.env.APPROVE_TO_CALENDAR", process.env.APPROVE_TO_CALENDAR)
   const dates = dealData[process.env.ARR_PAY_DATE];
   console.log("🚀 ~ file: listenEvent.js:23 ~ dates", dates)
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
