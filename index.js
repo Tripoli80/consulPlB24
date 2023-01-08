@@ -1,41 +1,15 @@
-var express = require("express");
-var cors = require("cors");
-const logger = require("morgan");
+const { app } = require("./src/app");
+const { storage } = require("./src/helpers/storage");
 require("dotenv").config();
 
-var app = express();
-var bodyParser = require("body-parser");
+(async function () {
+  const PORT = process.env.PORT || 80;
 
-const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-const listenEvent = require("./src/routes/events");
-const { errorHandler } = require("./src/helpers");
-const { myStorage } = require("./src/helpers/storage");
-const PORT = process.env.PORT || 80;
+  await storage.init();
+  //   utils.rewriteCronFile(await jobDao.list());
 
-app.use(cors());
-console.log("first")
-// storage.init();
-console.log("second")
-// var app = express();
-
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
-// app.use(bodyParser.json())
-
-app.use(logger(formatsLogger));
-
-app.use("/api/", listenEvent);
-// app.use('/api/contacts', tryWrapper(auth), contactsRouter);
-app.use((req, res) => {
-  res.status(404).json({ message: "Routs not found" });
-});
-
-app.use(errorHandler);
-//Connect to the database before listening
-myStorage.init(
-    
-)
-app.listen(process.env.PORT, function () {
-  console.log(`CORS-enabled web server listening on port ${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log("Server running. Use our API on port: ", PORT);
+  });
+  //   routes.register(app);
+})();

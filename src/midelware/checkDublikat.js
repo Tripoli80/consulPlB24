@@ -1,10 +1,9 @@
-const { all } = require("axios");
-const { EVENT_ID } = require("../constans");
-const { myStorage } = require("../helpers/storage");
+const { storage } = require("../helpers/storage");
 
 const checkDublikat = async (req, res, next) => {
-  let alldoArr = await myStorage.getItem("idts");
+  let alldoArr = await storage.getItem("idts");
   if (alldoArr === undefined) {
+    console.log("🚀  undefined");
     alldoArr = [];
   }
   console.log("🚀1 allts", alldoArr);
@@ -13,14 +12,14 @@ const checkDublikat = async (req, res, next) => {
     body: { ts },
   } = req;
 
-  console.log("🚀2 ~ file: events.js:16 ~ ts", ts, "/", alldoArr);
+  console.log("🚀2 ~ ts", ts, "/", alldoArr);
 
   if (alldoArr.includes(Number(ts))) {
-    console.log("🚀3 ~includin", ts);
-    return res.status(210).send("already do");
+    console.log("🚀3 +++++++", Number(ts));
+    return res.status(210).send("already worked");
   }
   alldoArr.push(Number(ts));
-  await myStorage.setItem("idts", alldoArr);
+  await storage.setItem("idts", alldoArr);
   return next();
 };
 module.exports = { checkDublikat };
