@@ -27,6 +27,12 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
     result = [...result, await curl("calendar.event.add.json", option)];
   }
 
+  const option = { id: idDeal, fields, params: { REGISTER_SONET_EVENT: "N" } };
+  option.fields[process.env.ARR_PAY_DATE] = [];
+  option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
+  option.fields[process.env.COUNT_PAYMANT] = 0;
+
+  await curl("crm.deal.update.json", option);
   return result;
 };
 
