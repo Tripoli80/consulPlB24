@@ -20,9 +20,9 @@ const listeningEvents =  (req, res) => {
   const name = dealData["TITLE"];
 
   if (approve && dates.length > 0) {
-    addToCallendar({ dates, count, approve, name, idDeal }).then(() => {
+      addToCallendar({ dates, count, approve, name, idDeal })
       res.send("ok");
-    });
+    
   } else {
     res.send("not");
   }
