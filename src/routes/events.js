@@ -9,7 +9,7 @@ const router = express.Router();
 
 // router.post("/getdeal", tryWrapper(getDeal));
 
-router.post("/", checkDublikat, tryWrapper(listeningEvents));
+router.post("/", tryWrapper(listeningEvents));
 router.post("/cal", tryWrapper(addPaymentToCallendar));
 
 module.exports = router;
