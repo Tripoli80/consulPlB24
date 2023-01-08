@@ -9,7 +9,7 @@ var bodyParser = require("body-parser");
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 const listenEvent = require("./src/routes/events");
 const { errorHandler } = require("./src/helpers");
-const { storage } = require("./src/helpers/storage");
+const { myStorage } = require("./src/helpers/storage");
 const PORT = process.env.PORT || 80;
 
 app.use(cors());
@@ -28,7 +28,7 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 //Connect to the database before listening
-storage.init().then(() => {
+myStorage.init().then(() => {
   app.listen(process.env.PORT, function () {
     console.log(`CORS-enabled web server listening on port ${PORT}`);
   });
