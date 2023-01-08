@@ -22,7 +22,7 @@ const listeningEvents = async (req, res) => {
   console.log("🚀 ~  dateslength", dates.length);
   console.log("🚀 ~  approve", approve);
 
-  if (approve && dates.length > 0) {
+  if (+approve > 0 && dates.length > 0) {
     console.log("in If");
     const option = {
       id: idDeal,
