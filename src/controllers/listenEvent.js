@@ -34,7 +34,7 @@ const listeningEvents = async (req, res) => {
         REGISTER: "N",
       },
     };
-    option.fields[process.env.ARR_PAY_DATE] = null;
+    option.fields[process.env.ARR_PAY_DATE] = 0;
     option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
     option.fields[process.env.COUNT_PAYMANT] = 0;
 
