@@ -1,7 +1,7 @@
 // const { json } = require("body-parser");
 require("dotenv").config();
 
- let { EVENT_ID } = require("../constans");
+let { EVENT_ID } = require("../constans");
 const { addToCallendar } = require("../services/callendar");
 // const { tryWrapper } = require("../helpers");
 const { getDealById } = require("../services/dealServices");
@@ -9,14 +9,6 @@ const { getDealById } = require("../services/dealServices");
 const listeningEvents = async (req, res) => {
   const { ts, event } = req.body;
   const idDeal = req.body["data[FIELDS][ID]"];
-
-  //   console.log("🚀 ~ ts +event", ts, EVENT_ID, new Date());
-  //   if (EVENT_ID.includes(Number(ts))) {
-  //     console.log("!!!!!!!!!!alredy do");
-  //     return res.send("ok");
-  //   }
-  //   console.log("🚀 ~ ts +event", ts, EVENT_ID);
-
   EVENT_ID = [...EVENT_ID, Number(ts)];
 
   const dealData = await getDealById(Number(idDeal));
@@ -28,9 +20,12 @@ const listeningEvents = async (req, res) => {
 
   console.log("🚀 EVENT_ID", EVENT_ID);
   if (approve && dates.length > 0) {
-     addToCallendar({ dates, count, approve, name, idDeal });
+    addToCallendar({ dates, count, approve, name, idDeal }).then(() => {
+      res.send("ok");
+    });
+  } else {
+    res.send("not");
   }
-  res.send("ok");
 };
 
 module.exports = { listeningEvents };
