@@ -33,7 +33,9 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 //Connect to the database before listening
-myStorage.init()
+myStorage.init(
+    
+)
 app.listen(process.env.PORT, function () {
   console.log(`CORS-enabled web server listening on port ${PORT}`);
 });
