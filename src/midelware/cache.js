@@ -6,6 +6,8 @@ const verifyCache = (req, res, next) => {
     body: { ts },
   } = req;
   console.log("🚀  ts", ts);
+  console.log("🚀  tss/ts", cache.has("ts"));
+
   try {
     if (cache.has("ts")) {
       const tss = cache.get("ts");
