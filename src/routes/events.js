@@ -3,13 +3,13 @@ const { EVENT_ID } = require("../constans");
 const { addPaymentToCallendar } = require("../controllers/callendar");
 const { listeningEvents } = require("../controllers/listenEvent");
 const { tryWrapper } = require("../helpers");
-const { checkDublikat } = require("../midelware/checkDublikat");
+const {  verifyCache } = require("../midelware/cache");
 
 const router = express.Router();
 
 // router.post("/getdeal", tryWrapper(getDeal));
 
-router.post("/", tryWrapper(listeningEvents));
+router.post("/", verifyCache, tryWrapper(listeningEvents));
 router.post("/cal", tryWrapper(addPaymentToCallendar));
 
 module.exports = router;
