@@ -4,6 +4,7 @@ const logger = require("morgan");
 const events = require("./routes/events");
 const { errorHandler } = require("./helpers");
 var bodyParser = require("body-parser");
+const { checkDublikat } = require("./midelware/checkDublikat");
 
 
 var app = express();
@@ -16,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger(formatsLogger));
 // app.use(express.static(".node-persist"));
-
+app.use("/api/", checkDublikat);
 app.use("/api/", events);
 app.use((req, res) => {
   res.status(404).json({ message: "Routs not found" });

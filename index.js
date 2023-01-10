@@ -2,6 +2,7 @@ const { app } = require("./src/app");
 require("dotenv").config();
 
 (async function () {
+  global.ts = [];
   const PORT = process.env.PORT || 80;
 
   //   var s3Client = new AWS.S3();
