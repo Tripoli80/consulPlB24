@@ -43,7 +43,7 @@ const verifyCache = (req, res, next) => {
       console.log("🚀  tss/ts", tss, ts);
 
       if (tss.includes(Number(ts))) {
-        return res.status(210).send({ massage: "already includet" });
+        return res.status(409).send({ massage: "already includet" });
       }
       tss.push(Number(ts));
       cache.set("ts", tss);

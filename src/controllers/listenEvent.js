@@ -16,8 +16,7 @@ const listeningEvents = async (req, res) => {
   const count = dealData[process.env.COUNT_PAYMANT];
   const name = dealData["TITLE"];
   if (+approve > 0 && dates.length > 0) {
-   
-      const option = {
+    const option = {
       id: idDeal,
       fields: {},
       params: {
@@ -27,16 +26,16 @@ const listeningEvents = async (req, res) => {
         REGISTER: "N",
       },
     };
-      
-    option.fields[process.env.ARR_PAY_DATE] = [];
+
+    option.fields[process.env.ARR_PAY_DATE] = undefined;
     option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
     option.fields[process.env.COUNT_PAYMANT] = 0;
 
     await curl("crm.deal.update.json", option);
     await addToCallendar({ dates, count, approve, name, idDeal });
-    return res.status(201).send("ok");
+    return res.status(201).send({ message: "add to calendar" });
   } else {
-    return res.status(209).send("not");
+    return res.status(304).send({ message: "not approved" });
   }
 };
 
