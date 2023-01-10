@@ -44,8 +44,9 @@ const checkDublikat = async (req, res, next) => {
 
     console.log("🚀1 ~ ts", ts, "/", alldoArr);
     if (alldoArr.includes(Number(ts))) {
-      console.log("🚀3 pass", Number(ts));
-      return res.status(210).send("already worked");
+      return res
+        .status(409)
+        .send({ message: "conflict ts id bitrix24 envilopment" });
     }
     alldoArr.push(Number(ts));
     myts = { ts: alldoArr };
