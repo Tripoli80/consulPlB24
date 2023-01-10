@@ -1,6 +1,6 @@
 // const { storage } = require("../helpers/storage");
 
-const checkDublikat = async (req, res, next) => {
+const checkDublikat = (req, res, next) => {
   let alldoArr = global.ts;
   if (alldoArr === undefined) {
     console.log("🚀  undefined");
