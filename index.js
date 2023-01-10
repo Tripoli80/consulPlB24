@@ -1,7 +1,7 @@
 const { app } = require("./src/app");
 require("dotenv").config();
 
-(async function () {
+( function () {
   global.ts = [];
   const PORT = process.env.PORT || 80;
 

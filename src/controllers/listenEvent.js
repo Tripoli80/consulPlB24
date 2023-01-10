@@ -30,6 +30,7 @@ const listeningEvents = async (req, res) => {
     option.fields[process.env.ARR_PAY_DATE] = undefined;
     option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
     option.fields[process.env.COUNT_PAYMANT] = 0;
+    console.log("🚀 ~ file: listenEvent.js:33 ~ option", option)
 
     await curl("crm.deal.update.json", option);
     await addToCallendar({ dates, count, approve, name, idDeal });
