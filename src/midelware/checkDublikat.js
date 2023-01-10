@@ -1,7 +1,7 @@
 // const { storage } = require("../helpers/storage");
 
 const checkDublikat = async (req, res, next) => {
-  let alldoArr = await storage.getItem("idts");
+  let alldoArr = global.ts;
   if (alldoArr === undefined) {
     console.log("🚀  undefined");
     alldoArr = [];
@@ -19,7 +19,7 @@ const checkDublikat = async (req, res, next) => {
     return res.status(210).send("already worked");
   }
   alldoArr.push(Number(ts));
-  await storage.setItem("idts", alldoArr);
+  global.ts = alldoArr;
   return next();
 };
 module.exports = { checkDublikat };
