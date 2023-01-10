@@ -27,8 +27,11 @@ const checkDublikat = (req, res, next) => {
   const {
     body: { ts },
   } = req;
+  let alldoArr = global.ts;
+  alldoArr.push(Number(ts));
+  global.ts = alldoArr;
 
-  console.log("🚀2 ~ ts", ts);
+  console.log("🚀2 ~ ts", ts, global.ts);
 
   return next();
 };
