@@ -17,9 +17,11 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger(formatsLogger));
-// app.use(express.static(".node-persist"));
-app.use("/api/", auth);
-// app.use("/api/", events);
+
+// app.use("/api/", auth);
+app.use("/api/", events);
+
+
 app.use((req, res) => {
   res.status(404).json({ message: "Routs not found" });
 });

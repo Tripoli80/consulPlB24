@@ -1,7 +1,7 @@
 // const { json } = require("body-parser");
 require("dotenv").config();
 
-const { curl } = require("../helpers");
+const { curl, resetApproveToCalendar } = require("../helpers");
 const { storage } = require("../helpers/storage");
 const { addToCallendar } = require("../services/callendar");
 const { getDealById } = require("../services/dealServices");
@@ -15,28 +15,18 @@ const listeningEvents = async (req, res) => {
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
   const count = dealData[process.env.COUNT_PAYMANT];
   const name = dealData["TITLE"];
-  //   if (+approve > 0 && dates.length > 0) {
-  if (dates.length > 0) {
-    const option = {
-      id: idDeal,
-      fields: {},
-      params: {
-        REGISTER_SONET_EVENT: "N",
-      },
-    };
-    const arrzero = {};
-    option.fields[process.env.ARR_PAY_DATE] = arrzero;
-    option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
-    option.fields[process.env.COUNT_PAYMANT] = 0;
-
+    if (+approve > 0 && dates.length > 0) {
+  // if (dates.length > 0) {
+    const option = await resetApproveToCalendar(idDeal);
+    await addToCallendar({ dates, count, approve, name, idDeal });
     await curl("crm.deal.update.json", option);
-    const dealData2 = await getDealById(Number(idDeal));
-    const dates2 = dealData2[process.env.ARR_PAY_DATE];
+    
+    const resultDeal = await getDealById(Number(idDeal));
+    const dates2 = resultDeal[process.env.ARR_PAY_DATE];
 
-    // await addToCallendar({ dates, count, approve, name, idDeal });
     return res.status(201).send({ message: dates2 });
   } else {
-    return res.status(304).send({ message: "not approved" });
+    return res.status(300).send({ message: "not approved" });
   }
 };
 

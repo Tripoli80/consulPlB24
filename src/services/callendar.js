@@ -2,14 +2,16 @@ const { curl } = require("../helpers");
 
 const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
   let result = [];
- 
-
 
   for (const date of dates) {
+    if (date.includes("1999")) {
+      console.log("🚀 ~ file: callendar.js:11 ~ continue");
+      continue;
+    }
     const option = {
       type: "group",
       ownerId: "5",
-      name: `Paymant ${name} `,
+      name: `Плановая оплата ${name} `,
       description: `https://uait.bitrix24.ua/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
@@ -23,7 +25,6 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
       private_event: "N",
       remind: [{ type: "min", count: 60 }],
       location: "Warshava",
-      attendees: [1, 2, 3],
     };
 
     result = [...result, await curl("calendar.event.add.json", option)];

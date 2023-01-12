@@ -29,8 +29,24 @@ const curl = async (metod, option) => {
   }
 };
 
+const resetApproveToCalendar = async (idDeal) => {
+  const option = {
+    id: idDeal,
+    fields: {},
+    params: {
+      REGISTER_SONET_EVENT: "N",
+    },
+  };
+
+  option.fields[process.env.ARR_PAY_DATE] = ["00-00-00"];
+  option.fields[process.env.APPROVE_TO_CALENDAR] = 0;
+  option.fields[process.env.COUNT_PAYMANT] = 0;
+  return option;
+};
+
 module.exports = {
   tryWrapper,
   errorHandler,
   curl,
+  resetApproveToCalendar,
 };
