@@ -10,14 +10,14 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
     }
     const option = {
       type: "group",
-      ownerId: "5",
+      ownerId: "2",
       name: `Плановая оплата ${name} `,
-      description: `https://uait.bitrix24.ua/crm/deal/details/${idDeal}/`,
+      description: `https://consultcorporated.bitrix24.pl/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
       skipTime: "Y",
-      section: 33,
-      color: "#9cbe1c",
+      section: 26,
+      color: "#00a64c",
       text_color: "#283033",
       accessibility: "free",
       importance: "normal",
