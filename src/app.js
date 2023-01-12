@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(logger(formatsLogger));
 
-// app.use("/api/", auth);
+app.use("/api/", auth);
 app.use("/api/", events);
 
 

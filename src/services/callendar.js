@@ -1,11 +1,18 @@
 const { curl } = require("../helpers");
 
-const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
+const addToCallendar = async ({
+  dates,
+  count,
+  approve,
+  name,
+  idDeal,
+  user,
+}) => {
+  console.log("🚀 ~ file: callendar.js:4 ~ user", user);
   let result = [];
 
   for (const date of dates) {
     if (date.includes("1999")) {
-      console.log("🚀 ~ file: callendar.js:11 ~ continue");
       continue;
     }
     const option = {
@@ -21,13 +28,27 @@ const addToCallendar = async ({ dates, count, approve, name, idDeal }) => {
       text_color: "#283033",
       accessibility: "free",
       importance: "normal",
-      is_meeting: "N",
+      is_meeting: "Y",
       private_event: "N",
       remind: [{ type: "min", count: 60 }],
       location: "Warshava",
+      attendees: [user],
+      host: 1,
+      meeting: {
+        text: "inviting text",
+        open: true,
+        notify: true,
+        reinvite: false,
+      },
     };
-
-    result = [...result, await curl("calendar.event.add.json", option)];
+    try {
+      const res =await curl("calendar.event.add.json", option);
+      result = [...result, res];
+      
+    } catch (error) {
+      console.log("🚀 ~ file: callendar.js:49 ~ error", error)
+      
+    }
   }
 
   return result;

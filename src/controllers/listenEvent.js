@@ -10,15 +10,18 @@ const listeningEvents = async (req, res) => {
   const idDeal = req.body["data[FIELDS][ID]"];
 
   const dealData = await getDealById(Number(idDeal));
+    // return res.status(201).send({ message: dealData });
+
 
   const dates = dealData[process.env.ARR_PAY_DATE];
   const approve = dealData[process.env.APPROVE_TO_CALENDAR];
   const count = dealData[process.env.COUNT_PAYMANT];
+  const user = dealData["ASSIGNED_BY_ID"];
   const name = dealData["TITLE"];
     if (+approve > 0 && dates.length > 0) {
   // if (dates.length > 0) {
     const option = await resetApproveToCalendar(idDeal);
-    await addToCallendar({ dates, count, approve, name, idDeal });
+    await addToCallendar({ dates, count, approve, name, idDeal, user });
     await curl("crm.deal.update.json", option);
     
     const resultDeal = await getDealById(Number(idDeal));

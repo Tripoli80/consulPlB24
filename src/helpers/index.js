@@ -34,7 +34,7 @@ const resetApproveToCalendar = async (idDeal) => {
     id: idDeal,
     fields: {},
     params: {
-      REGISTER_SONET_EVENT: "N",
+      REGISTER_SONET_EVENT: "Y",
     },
   };
 
