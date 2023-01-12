@@ -41,8 +41,6 @@ const checkDublikat = async (req, res, next) => {
       .promise();
 
     let alldoArr = JSON.parse(myts.Body).ts;
-
-    console.log("🚀1 ~ ts", ts, "/", alldoArr);
     if (alldoArr.includes(Number(ts))) {
       return res
         .status(409)
