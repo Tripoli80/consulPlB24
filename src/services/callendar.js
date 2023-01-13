@@ -18,7 +18,7 @@ const addToCallendar = async ({
     const option = {
       type: "group",
       ownerId: "2",
-      name: `2 Плановая оплата ${name} `,
+      name: `3 Плановая оплата ${name} `,
       description: `https://consultcorporated.bitrix24.pl/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
@@ -40,7 +40,7 @@ const addToCallendar = async ({
         notify: true,
         reinvite: false,
       },
-      UF_CRM_CAL_EVENT: `D_${idDeal}`,
+      UF_CRM_CAL_EVENT: [idDeal],
     };
     try {
       const res = await curl("calendar.event.add.json", option);
