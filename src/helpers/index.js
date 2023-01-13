@@ -2,6 +2,7 @@ const axios = require("axios").default;
 const { BadRequest } = require("http-errors");
 const fs = require("fs").promises;
 
+
 const tryWrapper = (controller) => {
   return (req, res, next) => {
     controller(req, res, next).catch(next);
@@ -44,9 +45,23 @@ const resetApproveToCalendar = async (idDeal) => {
   return option;
 };
 
+const prpareUpdateDealFinger = async ({ idDeal, idEvent }) => {
+  const ID_FINGER_DATE = process.env.ID_FINGER_DATE;
+  const option = {
+    id: idDeal,
+    fields: {},
+    params: {
+      REGISTER_SONET_EVENT: "Y",
+    },
+  };
+  option.fields[ID_FINGER_DATE] = idEvent;
+  return option;
+};
+
 module.exports = {
   tryWrapper,
   errorHandler,
   curl,
   resetApproveToCalendar,
+  prpareUpdateDealFinger,
 };

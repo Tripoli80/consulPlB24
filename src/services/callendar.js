@@ -1,29 +1,25 @@
 const { curl } = require("../helpers");
+require("dotenv").config();
 
-const addToCallendar = async ({
-  dates,
-  count,
-  approve,
-  name,
-  idDeal,
-  user,
-}) => {
-  console.log("🚀 ~ file: callendar.js:4 ~ user", user);
+const addToCallendar = async ({ dates, name, idDeal, user }) => {
   let result = [];
-
+  let counter = 0;
   for (const date of dates) {
-    if (date.includes("1999")) {
-      continue;
-    }
+    counter += 1;
+
+    const CALENDAR_GROUP = process.env.CALENDAR_PAYMANT_GROUP;
+    const CALENDAR_SECTION = process.env.CALENDAR_PAYMANT_SECTION;
+    const URI_PORTAL = process.env.URI_PORTAL;
+
     const option = {
       type: "group",
-      ownerId: "2",
-      name: ` 3 Плановая оплата ${name} `,
-      description: `https://consultcorporated.bitrix24.pl/crm/deal/details/${idDeal}/`,
+      ownerId: CALENDAR_GROUP,
+      name: `PAY #${counter}: ${name} `,
+      description: `${URI_PORTAL}/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
       skipTime: "Y",
-      section: 26,
+      section: CALENDAR_SECTION,
       color: "#00a64c",
       text_color: "#283033",
       accessibility: "free",
@@ -40,17 +36,56 @@ const addToCallendar = async ({
         notify: true,
         reinvite: false,
       },
-      crm_entity: `D_${idDeal}`,
     };
+
     try {
       const res = await curl("calendar.event.add.json", option);
       result = [...result, res];
     } catch (error) {
-      console.log("🚀 ~ file: callendar.js:49 ~ error", error);
+      throw Error(error);
     }
   }
 
   return result;
 };
 
-module.exports = { addToCallendar };
+const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
+  let idEvent;
+  const CALENDAR_GROUP = process.env.CALENDAR_FINGER_GROUP;
+  const CALENDAR_SECTION = process.env.CALENDAR_FINGER_SECTION;
+  const URI_PORTAL = process.env.URI_PORTAL;
+  const option = {
+    type: "group",
+    ownerId: CALENDAR_GROUP,
+    name: `${name} `,
+    description: `${URI_PORTAL}/crm/deal/details/${idDeal}/`,
+    from: date,
+    to: date,
+    skipTime: "N",
+    section: CALENDAR_SECTION,
+    color: "#00a64c",
+    text_color: "#283033",
+    accessibility: "free",
+    importance: "normal",
+    is_meeting: "Y",
+    private_event: "N",
+    remind: [{ type: "min", count: 60 }],
+    location: "Warshava",
+    attendees: [user],
+    host: 1,
+    meeting: {
+      text: "inviting text",
+      open: true,
+      notify: true,
+      reinvite: false,
+    },
+  };
+  try {
+    idEvent = await curl("calendar.event.add.json", option);
+  } catch (error) {
+    throw Error(error);
+  }
+  return idEvent;
+};
+
+module.exports = { addToCallendar, addToFingerCallendar };

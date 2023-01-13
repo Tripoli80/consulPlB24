@@ -6,6 +6,7 @@ const { errorHandler } = require("./helpers");
 var bodyParser = require("body-parser");
 const { checkDublikat } = require("./midelware/checkDublikat");
 const auth = require("./midelware/auth");
+require("dotenv").config();
 
 
 var app = express();
