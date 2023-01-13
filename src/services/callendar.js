@@ -18,7 +18,7 @@ const addToCallendar = async ({
     const option = {
       type: "group",
       ownerId: "2",
-      name: `1 Плановая оплата ${name} `,
+      name: `2 Плановая оплата ${name} `,
       description: `https://consultcorporated.bitrix24.pl/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
