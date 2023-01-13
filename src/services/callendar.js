@@ -40,7 +40,7 @@ const addToCallendar = async ({
         notify: true,
         reinvite: false,
       },
-      uf_crm_entity: `DEAL_${idDeal}`,
+      crm_entity: `DEAL_${idDeal}`,
     };
     try {
       const res = await curl("calendar.event.add.json", option);
