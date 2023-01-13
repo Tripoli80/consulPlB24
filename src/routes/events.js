@@ -1,6 +1,4 @@
 const express = require("express");
-const { EVENT_ID } = require("../constans");
-const { addPaymentToCallendar } = require("../controllers/callendar");
 const { listeningEvents } = require("../controllers/listenEvent");
 const { tryWrapper } = require("../helpers");
 
