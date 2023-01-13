@@ -18,7 +18,7 @@ const addToCallendar = async ({
     const option = {
       type: "group",
       ownerId: "2",
-      name: `Плановая оплата ${name} `,
+      name: `1 Плановая оплата ${name} `,
       description: `https://consultcorporated.bitrix24.pl/crm/deal/details/${idDeal}/`,
       from: date,
       to: date,
@@ -43,12 +43,10 @@ const addToCallendar = async ({
       UF_CRM_EVENT: `DEAL_${idDeal}`,
     };
     try {
-      const res =await curl("calendar.event.add.json", option);
+      const res = await curl("calendar.event.add.json", option);
       result = [...result, res];
-      
     } catch (error) {
-      console.log("🚀 ~ file: callendar.js:49 ~ error", error)
-      
+      console.log("🚀 ~ file: callendar.js:49 ~ error", error);
     }
   }
 
