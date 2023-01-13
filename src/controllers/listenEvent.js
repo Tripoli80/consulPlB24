@@ -33,7 +33,7 @@ const listeningEvents = async (req, res) => {
   // response const
   let returnData = {};
   // Check if approve is greater than 0 and dates are present
-  if (1&& dates.length > 0) {
+  if (+approve&& dates.length > 0) {
     const paymentInfo = await addPaymantDate({
       dates,
       count,

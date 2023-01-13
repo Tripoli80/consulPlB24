@@ -9,7 +9,7 @@ const auth = require("./midelware/auth");
 require("dotenv").config();
 
 
-var app = express();
+const app = express();
 
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";

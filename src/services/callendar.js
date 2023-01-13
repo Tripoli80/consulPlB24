@@ -54,6 +54,11 @@ const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
   const CALENDAR_GROUP = process.env.CALENDAR_FINGER_GROUP;
   const CALENDAR_SECTION = process.env.CALENDAR_FINGER_SECTION;
   const URI_PORTAL = process.env.URI_PORTAL;
+  let skip = "N";
+
+  if (date.includes("00:00:00")) {
+    skip = "Y";
+  }
   const option = {
     type: "group",
     ownerId: CALENDAR_GROUP,
@@ -61,7 +66,7 @@ const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
     description: `${URI_PORTAL}/crm/deal/details/${idDeal}/`,
     from: date,
     to: date,
-    skipTime: "N",
+    skipTime: skip,
     section: CALENDAR_SECTION,
     color: "#00a64c",
     text_color: "#283033",
