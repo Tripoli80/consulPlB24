@@ -68,7 +68,7 @@ const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
     to: date,
     skipTime: skip,
     section: CALENDAR_SECTION,
-    color: "#00a64c",
+    color: "rgb(222, 43, 36)",
     text_color: "#283033",
     accessibility: "free",
     importance: "normal",
