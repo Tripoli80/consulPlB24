@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const { curl, resetApproveToCalendar } = require("../helpers");
 const { addToCallendar } = require("../services/callendar");
+const { addCardToCellendar } = require("../services/cardServices");
 const { getDealById } = require("../services/dealServices");
 const { addFingerToCellendar } = require("../services/fingerServices");
 const { addPaymantDate } = require("../services/paymentServices");
@@ -11,8 +12,12 @@ const listeningEvents = async (req, res) => {
   const ARR_PAY_DATE = process.env.ARR_PAY_DATE;
   const APPROVE_TO_CALENDAR = process.env.APPROVE_TO_CALENDAR;
   const COUNT_PAYMANT = process.env.COUNT_PAYMANT;
+  
   const FINGER_DATE = process.env.FINGER_DATE;
   const ID_FINGER_DATE = process.env.ID_FINGER_DATE;
+
+  const CARD_DATE = process.env.CARD_DATE; ;
+  const ID_TAKE_CARD_DATE = process.env.ID_TAKE_CARD_DATE;
 
   // Extract idDeal from request body
   const idDeal = req.body["data[FIELDS][ID]"];
@@ -28,6 +33,10 @@ const listeningEvents = async (req, res) => {
   const name = dealData["TITLE"];
   const fingerDate = dealData[FINGER_DATE];
   const idFingerDate = dealData[ID_FINGER_DATE];
+
+  const cardDate = dealData[CARD_DATE];
+  const idTakeCardDate = dealData[ID_TAKE_CARD_DATE];
+
 
 
   // response const
@@ -56,7 +65,16 @@ const listeningEvents = async (req, res) => {
     fingerInfo.status = 201;
     returnData = { ...returnData, fingerInfo };
   }
-
+  if (!idTakeCardDate && cardDate) {
+    let cardInfo = await addCardToCellendar({
+      date: cardDate,
+      name,
+      idDeal,
+      user,
+    });
+    cardInfo.status = 201;
+    returnData = { ...returnData, info: cardInfo };
+  }
   return res.status(200).send(returnData);
 };
 
