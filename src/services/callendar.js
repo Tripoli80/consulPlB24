@@ -97,6 +97,7 @@ const addToCardCallendar = async ({ date, name, idDeal, user }) => {
   let idEvent;
   const CALENDAR_GROUP = process.env.CALENDAR_FINGER_GROUP;
   const CALENDAR_SECTION = process.env.CALENDAR_CARD_SECTION;
+  console.log("🚀 ~ file: callendar.js:100 ~ CALENDAR_SECTION:", CALENDAR_SECTION)
   const URI_PORTAL = process.env.URI_PORTAL;
   let skip = "N";
 
