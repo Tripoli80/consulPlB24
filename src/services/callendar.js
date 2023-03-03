@@ -53,7 +53,6 @@ const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
   let idEvent;
   const CALENDAR_GROUP = process.env.CALENDAR_FINGER_GROUP;
   const CALENDAR_SECTION = process.env.CALENDAR_FINGER_SECTION;
-  console.log("🚀 ~ file: callendar.js:56 ~ CALENDAR_SECTION:", CALENDAR_SECTION)
   const URI_PORTAL = process.env.URI_PORTAL;
   let skip = "N";
 
@@ -69,9 +68,8 @@ const addToFingerCallendar = async ({ date, name, idDeal, user }) => {
     to: date,
     skipTime: skip,
     section: CALENDAR_SECTION,
-    // color: "#de2b24",
-    // background_color:"#de2b24",
-    // text_color: "#283033",
+    color: "#00a64c",
+    text_color: "#283033",
     accessibility: "free",
     importance: "normal",
     is_meeting: "Y",
@@ -114,7 +112,7 @@ const addToCardCallendar = async ({ date, name, idDeal, user }) => {
     to: date,
     skipTime: skip,
     section: CALENDAR_SECTION,
-    color: "#00a64c",
+    color: "#de2b24",
     text_color: "#283033",
     accessibility: "free",
     importance: "normal",
